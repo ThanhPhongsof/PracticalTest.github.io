@@ -1,0 +1,152 @@
+﻿
+html {
+    scroll-behavior: smooth;
+}
+
+@media (min-width:1200px) and (max-width:1699px) {
+    .homeFinal {
+        max-height: 600px !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+}
+
+@media (min-width:1700px) {
+    .homeFinal {
+        max-height: 755px !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+}
+
+.table-scroll {
+    display: block;
+    empty-cells: show;
+}
+
+    .table-scroll thead {
+        position: relative;
+        display: block;
+        width: 100%;
+        overflow-y: hidden;
+    }
+
+    .table-scroll tr {
+        width: 100%;
+        display: flex;
+    }
+
+    .table-scroll td, .table-scroll th {
+        flex-basis: 100%;
+        flex-grow: 2;
+        display: block;
+        text-align: left;
+    }
+
+    .table-scroll tbody {
+        display: block;
+        position: relative;
+        width: 100%;
+        overflow-y: scroll;
+    }
+
+    /* Other options */
+
+    .table-scroll.small-first-col td:first-child,
+    .table-scroll.small-first-col th:first-child {
+        max-width: 30px;
+    }
+
+    .table-scroll td:nth-child(2),
+    .table-scroll th:nth-child(2) {
+        max-width: 88px;
+    }
+
+    .table-scroll td:nth-child(3),
+    .table-scroll th:nth-child(3) {
+        max-width: 175px;
+    }
+
+    .table-scroll td:nth-child(4),
+    .table-scroll th:nth-child(4) {
+        max-width: 70px;
+    }
+
+    .table-scroll td:nth-child(5),
+    .table-scroll th:nth-child(5) {
+        max-width: 110px;
+    }
+
+    .table-scroll td:nth-child(6),
+    .table-scroll th:nth-child(6) {
+        max-width: 110px;
+    }
+
+    .table-scroll td:nth-child(7),
+    .table-scroll th:nth-child(7) {
+        max-width: 120px;
+    }
+
+.body-half-screen {
+    max-height: 166px;
+}
+
+.small-col {
+    flex-basis: 10%;
+}
+
+/* width */
+.table-scroll tbody::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+.table-scroll tbody::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.table-scroll tbody::-webkit-scrollbar-thumb {
+    background: #abbac3;
+}
+
+    /* Handle on hover */
+    .table-scroll tbody::-webkit-scrollbar-thumb:hover {
+        background: #41474a;
+    }
+
+/* width */
+#home::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+#home::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+#home::-webkit-scrollbar-thumb {
+    background: #abbac3;
+}
+
+    /* Handle on hover */
+    #home::-webkit-scrollbar-thumb:hover {
+        background: #41474a;
+    }
+
+.classTableOpacity {
+    opacity: 0;
+    visibility: hidden;
+    transition: ease-in-out 1s;
+    -webkit-transition: ease-in-out 1s;
+}
+
+.showabc {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.colorlabel {
+    color: #151515 !important;
+}

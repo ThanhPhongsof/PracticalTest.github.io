@@ -1,0 +1,83 @@
+﻿@using Kendo.Mvc
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<style>
+    .modal-body {
+        padding: 0px !important;
+        max-height: max-content !important;
+    }
+
+    .marginTop {
+        margin-top: 4px;
+    }
+</style>
+
+<div class="row-fluid">
+    <div class="span12">
+        <input type="text" id="filterText" placeholder="NRIC, Name…" style="width:120px" />
+
+        @(Html.Kendo().DropDownList().Name("GenderF")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .OptionLabel("Select Gender...")
+            .HtmlAttributes(new { style = "width: 120px" })
+            .Events(events => events.Change("filter"))
+            .BindTo(ViewBag.Gender)
+        )
+
+        <button type="button" id="btnSearch" class="btn btn-primary btn-small btnSearch" onclick="filter()" style="float:none">Search</button>
+    </div>
+</div>
+
+@(Html.Kendo().Grid<System.Models.User>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.id).Title("").Width(100).Filterable(false).Sortable(false).IncludeInMenu(false)
+            .ClientTemplate("<a class='btn btn-minier btnClick' onclick=\"OpenUser(#:id#,'#:uid#')\">Edit</a>");
+        columns.Bound(p => p.id).Width(60).Title("S/N");
+        columns.Bound(p => p.NRIC).Width(120).Title("NRIC");
+        columns.Bound(p => p.Name).Width(120).Title("Name");
+        columns.ForeignKey(p => p.Gender, (System.Collections.IEnumerable)ViewBag.Gender, "Value", "Text").Width(100).Title("Gender");
+        columns.Bound(p => p.Age).Width(60).Title("Age").ClientTemplate("#:Age#");
+        columns.Bound(p => p.Subjects).Width(60).Title("NO. Of Subjects").ClientTemplate("#if(NoSubjects > 0){# #:NoSubjects# #}#");
+    })
+    .ToolBar(tools =>
+    {
+        tools.Template(
+            @<text>
+                <div class="classBlock">
+                    <button type="button" class="btn btn-info k-button k-button-icontext btnSearch" onclick="OpenUser(0)" style="float:left;margin-right:4px">Add New</button>
+                </div>
+            </text>);
+    })
+    .AutoBind(false)
+    .Scrollable()
+    .Events(e => { e.DataBound("Databound"); })
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Batch(true)
+        .PageSize(50)
+        .Events(events => { events.Error("error_handler"); })
+        .Model(model =>
+        {
+            model.Id(p => p.id);
+            model.Field(p => p.id).Editable(false);
+            model.Field(p => p.Gender).DefaultValue(1);
+            model.Field(p => p.NRIC).Editable(true);
+            model.Field(p => p.Name).Editable(true);
+            model.Field(p => p.Birthday).Editable(true);
+            model.Field(p => p.Gender).Editable(true);
+        })
+        .Sort(p => p.Add(m => m.id).Descending())
+        .Read(read => read.Action("Read", "Home"))
+        .Create(create => create.Action("Create", "Home"))
+        .Update(update => update.Action("CreateOrUpdate", "Home"))
+        )
+)
+
+@Html.Partial("_home")
+

@@ -1,0 +1,409 @@
+﻿@{
+    /**/
+
+    //  Đơn vị tiền tệ set cho toàn bộ hệ thống, theo từng nước
+
+    //  lo-LA: Thay đổi tiền tố này để lấy theo từng nước
+    //  http://kendo.cdn.telerik.com/2015.2.805/js/cultures/kendo.culture.lo-LA.min.js
+    var culture = System.Globalization.CultureInfo.CurrentCulture.ToString();
+
+
+    var _currentUser = User.Identity.Name;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Test 2359</title>
+    <link href="@Url.Content("~/Images/icon-fv.ico?v=0001")" rel="shortcut icon" type="image/x-icon" />
+    <meta name="description" content="Common form elements and layouts" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="manifest" href="/manifest.json">
+    <link href="@Styles.Url("~/Content/template/bootstrap")" rel="stylesheet" />
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/assets/css/font-awesome.min.css?v=0001")" />
+    @Styles.Render("~/Content/template")
+    @Styles.Render("~/Content/ace")
+
+    @Styles.Render("~/Content/kendo/2015.1.429/kendo")
+    <link href="@Url.Content("~/Content/customizekendo.css?v=0001")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/mystyle.css?v=0001")" rel="stylesheet" type="text/css" />
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/ace")
+    @Scripts.Render("~/bundles/template")
+    @Scripts.Render("~/bundles/setting")
+    @Scripts.Render("~/bundles/kendo")
+
+    <script src="~/Scripts/multiLanguajeDemo.js?v=1"></script>
+
+    @RenderSection("scripts", required: false)
+    <script>
+        var ROOT = '@Url.Content("~/")';
+        var r = ROOT.substring(0, ROOT.length - 1);
+    </script>
+
+    <script src="@Url.Content("~/Scripts/kendo/2015.1.429/cultures/kendo.culture." + culture + ".min.js")"></script>
+
+    <script>
+        kendo.culture("@culture");
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".setLang").on("click", function (event) {
+                var lang = $(this).attr("data-lang");
+                MultiLanguageDemo.Cookies.setCookie("LangForMultiLanguageDemo", lang, 3000);
+
+                location.reload(true);
+            })
+
+            $('[data-rel=popover]').popover({ container: 'body' });
+        });
+    </script>
+
+    <script type="text/javascript">
+        //  Get date difference.
+        //  http://ejohn.org/projects/javascript-pretty-date/
+        function prettyDate(date, now) {
+            var diff = (((now || (new Date())).getTime() - date.getTime()) / 1000),
+                day_diff = Math.floor(diff / 86400);
+
+            var text = "";
+            if (day_diff > 0) {
+                text += day_diff + " ngày, ";
+            }
+
+            text += (Math.floor(diff / 3600) - (day_diff * 24)) + " giờ";
+
+            return text;
+        }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134711353-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-134711353-1');
+    </script>
+
+</head>
+<body ng-app="app" style="font-size: 12px;" class="bodycontainer_dungnt">
+
+    <div class="navbar" id="navbar">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+
+        <div class="navbar-innerDeca" style="background: linear-gradient(to right, #fdfdfd , #50b748) !important;">
+            <div class="container-fluid">
+
+                <!--/.brand-->
+                <ul class="nav ace-nav pull-right">
+
+                    <li class="decaprofile md col-sm-8" style="background: #f2673a;">
+                        <a data-toggle="dropdown" href="@Url.Content("~/")" class="dropdown-toggle">
+                            <span class="user-info">
+                                <small>Hello    ,</small>
+                                <strong>@_currentUser</strong>
+                            </span>
+                            <i class="icon-caret-down" style="font-size:24px;"></i>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!--/.ace-nav-->
+            </div>
+            <!--/.container-fluid-->
+        </div>
+        <!--/.navbar-inner-->
+    </div>
+
+    <div class="main-container container-fluid">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <div class="sidebar menu-min" id="sidebar">
+            <script type="text/javascript">
+                try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
+            </script>
+            <ul class="nav nav-list">
+                <li class="subLI">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-cogs"></i>
+                        <span class="menu-text menu-textlv1"> System </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li controllername="users">
+                            <a href="@Url.Content("~/users")">
+                                <i class="icon-angle-right"></i>
+                                <span class="menu-text"> Users </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <!--/.nav-list-->
+
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-angle-right"></i>
+            </div>
+
+        </div>
+
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="icon-home home-icon"></i>
+                        <a href="@Url.Content("~/")">HomePage</a>
+                        <span class="divider">
+                            <i class="icon-angle-right arrow-icon"></i>
+                        </span>
+                    </li>
+                    <li class="active">@ViewBag.Title</li>
+                </ul>
+                <!--.breadcrumb-->
+                <div style="float:right; color:red"><b id="text_time"></b></div>
+            </div>
+
+            <div class="page-content">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <!--PAGE CONTENT BEGINS-->
+                        @RenderSection("Body", required: false)
+                        @RenderBody()
+                        <!--PAGE CONTENT ENDS-->
+                    </div>
+                    <!--/.span-->
+                </div>
+                <!--/.row-fluid-->
+            </div>
+            <!--/.page-content-->
+        </div>
+        <!--/.main-content-->
+    </div>
+    <!--/.main-container-->
+    <!--basic scripts-->
+    <script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='@Url.Content("~/Scripts/assets/js/jquery.mobile.custom.min.js")'>" + "<" + "/script>");
+    </script>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/validate")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (document.domain != "localhost") {
+                window.setInterval('text_time()', 200);
+            }
+        });
+
+        /*========================================= START - Những hàm mặc định load grid của kendo  =======================================================*/
+
+        //  Check all checkbox in grid
+        function checkAll(e) {
+            var x = $(e).prop('checked');
+            $("#grid").find(".checkrowid").each(function () {
+                $(this).prop('checked', x);
+            });
+        }
+
+        //  resizeGrid
+        function resizeGridBase(grid) {
+            if (grid) {
+                var offsetbottom = parseInt($(window).height()) - parseInt($('#' + grid).offset().top);
+                var gridElement = $('#' + grid),
+                    dataArea = gridElement.find(".k-grid-content"),
+                    otherElements = gridElement.children().not(".k-grid-content"),
+                    otherElementsHeight = 0;
+                otherElements.each(function () {
+                    otherElementsHeight += $(this).outerHeight();
+                });
+                dataArea.height(offsetbottom - otherElementsHeight - 28);
+            }
+        }
+
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                $.gritter.add({ title: '', text: message, class_name: 'gritter-error' });
+            } else {
+                $.gritter.add({ title: '', text: 'Create successful', class_name: 'gritter-success' });
+            }
+        }
+
+        function onRequestEnd(e) {
+            if (e.type == "update" && !e.response.Errors) {
+                $.gritter.add({ title: '', text: 'Update successfully', class_name: 'gritter-success' });
+                $("#grid").data("kendoGrid").dataSource.read();
+            }
+            if (e.type == "create" && !e.response.Errors) {
+                $.gritter.add({ title: '', text: 'Create successfully', class_name: 'gritter-success' });
+                $("#grid").data("kendoGrid").dataSource.read();
+            }
+        }
+
+        $(window).resize(function () {
+            resizeGridBase("grid");
+        });
+
+        $("#filterText").keypress(function (e) {
+            if (e.keyCode == 13) {
+                filter();
+            }
+        });
+
+        /*========================================= END - Những hàm mặc định load grid của kendo  =======================================================*/
+    </script>
+
+
+
+    <script type="text/javascript">
+        function updateValue(id, value) {
+            // this gets called from the popup window and updates the field with a new value
+            var jqueryObjectByClass = $(".cke_dialog_ui_input_text")[1];
+            jqueryObjectByClass.value = value;
+        }
+
+        var pathname = window.location.pathname.toLowerCase() + window.location.search.toLowerCase();
+        $('.nav-list a').each(function () {
+            if ($(this).attr("href").toLowerCase() == pathname) {
+                var parent = $(this).parent("li");
+                parent.addClass("active");
+                if (parent.parent("ul").parent("li").length > 0) {
+                    parent.parent("ul").parent("li").addClass("active open");
+                    if (parent.parent("ul").parent("li").parent("ul").parent("li").length > 0) {
+                        parent.parent("ul").parent("li").parent("ul").parent("li").addClass("active open");
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var drawing = kendo.drawing;
+        var geometry = kendo.geometry;
+
+        function columnVisual(e) {
+            return createColumn(e.rect, e.options.color);
+        }
+
+        function toggleHandler(e) {
+            e.preventDefault();
+            var visual = e.visual;
+            var opacity = e.show ? 0.8 : 1;
+
+            visual.opacity(opacity);
+        }
+
+        function createLegendItem(e) {
+            var color = e.options.markers.background;
+            var labelColor = e.options.labels.color;
+            var rect = new geometry.Rect([0, 0], [120, 50]);
+            var layout = new drawing.Layout(rect, {
+                spacing: 5,
+                alignItems: "center"
+            });
+
+            var overlay = drawing.Path.fromRect(rect, {
+                fill: {
+                    color: "#fff",
+                    opacity: 0
+                },
+                stroke: {
+                    color: "none"
+                },
+                cursor: "pointer"
+            });
+
+            var column = createColumn(new geometry.Rect([0, 0], [15, 10]), color);
+            var label = new drawing.Text(e.series.name, [0, 0], {
+                fill: {
+                    color: labelColor
+                }
+            })
+
+            layout.append(column, label);
+            layout.reflow();
+
+            var group = new drawing.Group().append(layout, overlay);
+
+            return group;
+        }
+
+        function createColumn(rect, color) {
+            var origin = rect.origin;
+            var center = rect.center();
+            var bottomRight = rect.bottomRight();
+            var radiusX = rect.width() / 2;
+            var radiusY = radiusX / 3;
+            var gradient = new drawing.LinearGradient({
+                stops: [{
+                    offset: 0,
+                    color: color
+                }, {
+                    offset: 0.5,
+                    color: color,
+                    opacity: 0.9
+                }, {
+                    offset: 0.5,
+                    color: color,
+                    opacity: 0.9
+                }, {
+                    offset: 1,
+                    color: color
+                }]
+            });
+
+            var path = new drawing.Path({
+                fill: gradient,
+                stroke: {
+                    color: "none"
+                }
+            }).moveTo(origin.x, origin.y)
+                .lineTo(origin.x, bottomRight.y)
+                .arc(180, 0, radiusX, radiusY, true)
+                .lineTo(bottomRight.x, origin.y)
+                .arc(0, 180, radiusX, radiusY);
+
+            var topArcGeometry = new geometry.Arc([center.x, origin.y], {
+                startAngle: 0,
+                endAngle: 360,
+                radiusX: radiusX,
+                radiusY: radiusY
+            });
+
+            var topArc = new drawing.Arc(topArcGeometry, {
+                fill: {
+                    color: color
+                },
+                stroke: {
+                    color: "#ebebeb"
+                }
+            });
+            var group = new drawing.Group();
+            group.append(path, topArc);
+            return group;
+        }
+    </script>
+
+</body>
+</html>
