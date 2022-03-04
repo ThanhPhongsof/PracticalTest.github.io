@@ -74,8 +74,6 @@
         })
         .Sort(p => p.Add(m => m.id).Descending())
         .Read(read => read.Action("Read", "Home"))
-        .Create(create => create.Action("CreateOrUpdate", "Home"))
-        .Update(update => update.Action("CreateOrUpdate", "Home"))
         )
 )
 
